@@ -19,21 +19,28 @@ const userSchema=new mongoose.Schema({
     }, 
     password:{
         type:String, 
+        required:true,
+    },
+    confirmPassword: {
+        type:String, 
         required:true, 
-        
     }, 
     accountType:{
         type:String, 
         enum:["Admin", "Student", "Instructer"], 
         required:true, 
     }, 
+    contactNumber: {
+        type:Number,
+        required:true,
+        trim:true,
+    },
     additionalDetails:{
         type:mongoose.Schema.Types.ObjectId, 
         required:true, 
         ref:"Profile"
 
-    }
-, 
+    }, 
     courses:[
         {type:mongoose.Schema.Types.ObjectId, 
        
@@ -45,9 +52,15 @@ const userSchema=new mongoose.Schema({
         required:true, 
 
     }, 
+    token:{
+        type:String,
+
+    },
+    resetPasswordExpires: {
+        type:Date,
+    },
     courseProgress:[{
-        type:mongoose.Schema.Types.ObjectId, 
-       
+        type:mongoose.Schema.Types.ObjectId,    
         ref:"CourseProgress"
     }
     ]
