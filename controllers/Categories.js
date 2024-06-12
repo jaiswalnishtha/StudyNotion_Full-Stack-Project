@@ -1,4 +1,4 @@
-const Tag =require("../models/category");
+const Tag =require("../models/Category");
 
 //handler function of atg
 exports.createCategory =async (req, res)=>{

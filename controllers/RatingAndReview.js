@@ -11,7 +11,7 @@ const {rating , review,courseId}=req.body;
 //check if user is enrolled or not
 const courseDetails = await Course.findOne({
     _id:courseId, 
-    studentsEnrolled:{$eleMatch:{$eq:userId}}, 
+    studentsEnrolled:{$elemMatch:{$eq:userId}}, 
 });
 if(!courseDetails){
     return res.status(404).json({
@@ -30,7 +30,7 @@ if(alreadyReviewed){
         message:"Course is already reviewed by the user", 
     })
 }
-const ratingReview=await RatingandReview.create({
+const ratingReview=await RatingAndReview.create({
     rating, review, course:courseId, user:userId, 
 })
 //update course with this rating/review
@@ -40,14 +40,14 @@ const updatedCourseDetails =await Course.findByIdAndUpdate({_id:courseId}, {
     }
 }, {new:true});
 console.log(updatedCourseDetails);
-return res.status(400).json({
+return res.status(200).json({
     success:true, 
     message:"Rating And Review created successfully", 
     ratingReview,
 })
     }
     catch(error){
-        return res.status(400).json({
+        return res.status(500).json({
             success:false, 
             message:message.error, 
           
