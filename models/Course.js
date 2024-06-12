@@ -39,6 +39,14 @@ studentsEnrolled:[{
     ref:"User"
 }
 ],
+instructions:{
+  type:[String],
+
+}, 
+status:{
+  type:String, 
+  enum:["Draft", "Published"],
+},
 
       
 });
