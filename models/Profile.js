@@ -7,6 +7,9 @@ const ProfileSchema=new mongoose.Schema({
    dateOfBirth:{
     type:String,
    }, 
+   profession: {
+      type:String,
+   },
    about:{
     type:String, 
     trim:true
