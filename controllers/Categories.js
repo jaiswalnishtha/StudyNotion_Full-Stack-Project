@@ -1,7 +1,7 @@
-const Tag =require("../models/tags");
+const Tag =require("../models/category");
 
 //handler function of atg
-exports.createTag =async (req, res)=>{
+exports.createCategory =async (req, res)=>{
     try{
 //fetch data
 const {name ,description }=req.body;
@@ -13,33 +13,33 @@ if(!name || !description){
     })
 }
 //create entry in db
-const tagDetails=await Tag.create({
+const categoryDetails=await Category.create({
     name:name, 
     description:description,
 });
-console.log(tagDetails);
+console.log(categoryDetails);
 //return response 
 return res.status(200).json({
     success:true, 
-    message:"Tag created successfully",
+    message:"Category created successfully",
 })
     }
     catch(error){
         return res.status(500).json({
             success:false,
             message:error.message,
-        })
+        });
 
     }
 };
-//getAll tags
-exports.showAlltags= async (req, res)=>{
+//getAll categories
+exports.showAllcategories= async (req, res)=>{
     try{
-        const allTags=await Tag.find({}, {name:true, description:true});
+        const showAllcategories=await Category.find({}, {name:true, description:true});
         res.status(200).json({
             success:true, 
-            message:" All Tag  returned successfully",
-            allTags,
+            message:" All Categories returned successfully",
+            allCategories,
         })
 
     }

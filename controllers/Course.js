@@ -1,5 +1,5 @@
   const Course =require("../models/Course");
-  const Tag =require("../models/tags");
+  const Tag =require("../models/category");
   const User=require("../models/User");
   const {uploadToCloudinary, uploadImageToCloudinary}= require("../utils/imageUploader");
 
@@ -7,12 +7,12 @@
   exports.createCourse = async (req, res)=>{
     try{
         //fetch data
-        const {courseName, courseDescription, whatYouWillLearn , price, tag}=req.body;
+        const {courseName, courseDescription, whatYouWillLearn , price, category }=req.body;
 
         //get thumbnail
         const thumbnail= req.files.thumbnailImage;
          //validation
-         if(!courseName || !courseDescription || !whatYouWillLearn || !price || !tag || !thumbnail){
+         if(!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !thumbnail){
             return res.status(400).json({
                 success:false, 
                 message:" All fields are required",
@@ -32,11 +32,11 @@
 
          //CHECK GIVVEN TAG IS VAID OR NOT
 
-         const tagDetails= await Tag.findById(tag);
-         if(!tagDetails){
+         const categoryDetails= await Category.findById(category);
+         if(!categoryDetails){
             return res.status(404).json({
                 success:false, 
-                message:" Tag Details not found",
+                message:" Category Details not found",
             });
          }
          //upload image to cloudinary
@@ -48,7 +48,7 @@
             instructor:instructorDetails._id, 
             whatYouWillLearn:whatYouWillLearn, 
             price, 
-            tag:tagDetails._id, 
+            category:categoryDetails._id, 
             thumbnail:thumbnailImage.secure_url,
          })
          //add the new course to the user schema
@@ -84,7 +84,7 @@
 
   //get allcourses handler function
 
-  exports.showAllCourses=async(req, req)=>{
+  exports.showAllCourses=async(req, res)=>{
     try{
         const allCourses= await Course.find({}, {
             courseName:true, 

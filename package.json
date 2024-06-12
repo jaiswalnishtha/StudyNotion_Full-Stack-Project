@@ -7,15 +7,12 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "keywords": [],
+  "keywords": [], 
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "cloudinary": "^2.2.0",
-=======
     "bcrypt": "^5.1.1",
->>>>>>> 138d37914a86e8d756bb6ed323abc2d94a3aff8d
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
