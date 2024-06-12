@@ -30,6 +30,14 @@ const userSchema=new mongoose.Schema({
         enum:["Admin", "Student", "Instructor"], 
         required:true, 
     }, 
+    active: {
+		type: Boolean,
+		default: true,
+	},
+	approved: {
+		type: Boolean,
+		default: true,
+	},
     contactNumber: {
         type:Number,
         required:true,
@@ -64,5 +72,5 @@ const userSchema=new mongoose.Schema({
         ref:"CourseProgress"
     }
     ]
-});
+}, {timestamps:true});
 module.exports=mongoose.model("user", userSchema); 

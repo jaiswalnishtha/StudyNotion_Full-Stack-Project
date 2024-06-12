@@ -1,4 +1,4 @@
-const Tag =require("../models/Category");
+const Category =require("../models/Category");
 
 //handler function of atg
 exports.createCategory =async (req, res)=>{
@@ -35,11 +35,11 @@ return res.status(200).json({
 //getAll categories
 exports.showAllcategories= async (req, res)=>{
     try{
-        const showAllcategories=await Category.find({}, {name:true, description:true});
+        const allCategorys = await Category.find({}, {name:true, description:true});
         res.status(200).json({
             success:true, 
             message:" All Categories returned successfully",
-            allCategories,
+            data: allCategorys,
         })
 
     }

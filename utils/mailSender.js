@@ -9,7 +9,7 @@ let transporter=nodemailer.createTransport({
     }
 });
 let info=await transporter.sendMail({
-    from:'StudyNotion || BY NISHTHA',
+    from:'StudyNotion || BY MNNIT',
     to:`${email}`,
     subject:`${title}`,
     html:`${body}`,
@@ -24,4 +24,4 @@ return info;
     
 
 };
-module.export=mailSender;
+module.exports=mailSender;

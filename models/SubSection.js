@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const subSectionSchema=new mongoose.Schema({
+const SubSectionSchema=new mongoose.Schema({
   title:{
     type:String, 
 
@@ -13,8 +13,7 @@ const subSectionSchema=new mongoose.Schema({
    }, 
    videoUrl:{
     type:String,
-   }
-,
+   },
       
 });
-module.exports=mongoose.model("SubSection",subSectionSchema); 
+module.exports=mongoose.model("SubSection",SubSectionSchema); 

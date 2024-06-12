@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 const category = require("./Category");
 
-const courseSchema=new mongoose.Schema({
+const coursesSchema=new mongoose.Schema({
   courseName:{
     type:String, 
   }, 
@@ -31,7 +31,7 @@ const courseSchema=new mongoose.Schema({
      
   ], 
   price:{
-    type:String, 
+    type:Number, 
   }, 
   thumbnail:{
     type:String, 
@@ -65,4 +65,4 @@ status:{
 
 });
 
-module.exports=mongoose.model("Course",courseSchema); 
+module.exports=mongoose.model("Course",coursesSchema); 
