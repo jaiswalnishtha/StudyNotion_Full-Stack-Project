@@ -3,15 +3,16 @@ const User = require("../models/User");
 const OTP = require("../models/OTP");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
+const bodyParser = require("body-parser");
 const mailSender = require("../utils/mailSender");
 const { passwordUpdated } = require("../mail/templates/passwordUpdate");
 const Profile = require("../models/Profile");
 require("dotenv").config();
 
 // Signup Controller for Registering USers
-
 exports.signup = async (req, res) => {
 	try {
+		console.log("Request Body:", req.body);
 		// Destructure fields from the request body
 		const {
 			firstName,
@@ -24,6 +25,7 @@ exports.signup = async (req, res) => {
 			otp,
 		} = req.body;
 		// Check if All Details are there or not
+		console.log("1");
 		if (
 			!firstName ||
 			!lastName ||
@@ -58,6 +60,7 @@ exports.signup = async (req, res) => {
 		// Find the most recent OTP for the email
 		const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
 		console.log(response);
+		console.log("a");
 		if (response.length === 0) {
 			// OTP not found for the email
 			return res.status(400).json({
@@ -66,6 +69,7 @@ exports.signup = async (req, res) => {
 			});
 		} else if (otp !== response[0].otp) {
 			// Invalid OTP
+			console.log("b");
 			return res.status(400).json({
 				success: false,
 				message: "The OTP is not valid",
