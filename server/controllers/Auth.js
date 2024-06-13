@@ -41,6 +41,7 @@ exports.signup = async (req, res) => {
 		}
 		// Check if password and confirm password match
 		if (password !== confirmPassword) {
+			console.log("2");
 			return res.status(400).json({
 				success: false,
 				message:
@@ -51,6 +52,7 @@ exports.signup = async (req, res) => {
 		// Check if user already exists
 		const existingUser = await User.findOne({ email });
 		if (existingUser) {
+			console.log("3");
 			return res.status(400).json({
 				success: false,
 				message: "User already exists. Please sign in to continue.",
@@ -78,11 +80,11 @@ exports.signup = async (req, res) => {
 
 		// Hash the password
 		const hashedPassword = await bcrypt.hash(password, 10);
-
+		console.log("4");
 		// Create the user
 		let approved = "";
 		approved === "Instructor" ? (approved = false) : (approved = true);
-
+		console.log("5");
 		// Create the Additional Profile For User
 		const profileDetails = await Profile.create({
 			gender: null,
@@ -101,13 +103,14 @@ exports.signup = async (req, res) => {
 			additionalDetails: profileDetails._id,
 			image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
 		});
-
+		console.log("6");
 		return res.status(200).json({
 			success: true,
 			user,
 			message: "User registered successfully",
 		});
 	} catch (error) {
+		console.log("7");
 		console.error(error);
 		return res.status(500).json({
 			success: false,
