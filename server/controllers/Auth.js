@@ -103,7 +103,7 @@ exports.signup = async (req, res) => {
 			additionalDetails: profileDetails._id,
 			image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
 		});
-		console.log("6");
+		console.log("user ki details upr wali: ",user);
 		return res.status(200).json({
 			success: true,
 			user,
