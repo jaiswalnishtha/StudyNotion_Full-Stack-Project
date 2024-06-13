@@ -86,7 +86,7 @@ exports.getAllUserDetails = async (req, res) => {
 		});
 	}
 };
-
+//updatedisplay picture
 exports.updateDisplayPicture = async (req, res) => {
     try {
       const displayPicture = req.files.displayPicture

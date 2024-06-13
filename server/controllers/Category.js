@@ -33,7 +33,7 @@ return res.status(200).json({
     }
 };
 //getAll categories
-exports.showAllcategories= async (req, res)=>{
+exports.showAllCategories= async(req, res)=>{
     try{
         const allCategorys = await Category.find({}, {name:true, description:true});
         res.status(200).json({
