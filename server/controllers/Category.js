@@ -1,5 +1,8 @@
+const { mongoose } = require("mongoose");
 const Category =require("../models/Category");
-
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max)
+  }
 //handler function of atg
 exports.createCategory =async (req, res)=>{
     try{
@@ -47,7 +50,7 @@ exports.showAllCategories= async(req, res)=>{
         return res.status(500).json({
             success:false,
             message:error.message,
-        })
+        });
     }
 }
 // category pager details 
@@ -55,6 +58,7 @@ exports.categoryPageDetails =async(req, res)=>{
     try{
 //get category id
 const {categoryId}=req.body;
+const updatedCategoryId = new mongoose.Types.ObjectId(categoryId);
 //get courses for specified category id
 const selectedCategory= await Category.findById(categoryId)
 .populate("courses")

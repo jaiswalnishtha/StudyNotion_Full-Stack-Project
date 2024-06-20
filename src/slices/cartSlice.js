@@ -17,6 +17,9 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    setTotalItems(state,value){
+      state.token = value.payload;
+    },
     addToCart: (state, action) => {
       const course = action.payload
       const index = state.cart.findIndex((item) => item._id === course._id)

@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import { Link, matchPath } from 'react-router-dom'
 import {NavbarLinks} from "../../data/navbar-links"
+import { AiOutlineMenu } from "react-icons/ai"
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiconnector'
 import { categories } from '../../services/apis'
-import { useState } from 'react'
 import {IoIosArrowDropdownCircle} from "react-icons/io"
-
+import { ACCOUNT_TYPE } from "../../utils/constants"
+ 
 const subLinks = [
-    {
+     {
         title: "python",
         link:"/catalog/python"
     },
@@ -22,31 +23,31 @@ const subLinks = [
     },
 ];
 
-
 const Navbar = () => {
-    console.log("Printing base url: ",process.env.REACT_APP_BASE_URL);
+    console.log("Printing base url: ", process.env.REACT_APP_BASE_URL);
     const {token} = useSelector( (state) => state.auth );
     const {user} = useSelector( (state) => state.profile );
     const {totalItems} = useSelector( (state) => state.cart )
     const location = useLocation();
 
-    const [ssubLinks, setSsubLinks]  = useState([]);
+    // const [subLinks, setSubLinks]  = useState([]);
+    const [loading,setLoading] = useState(false);
 
-    const fetchSublinks = async() => {
-        try{
-            const result = await apiConnector("GET", categories.CATEGORIES_API);
-            console.log("Printing Sublinks result:" , result);
-            setSsubLinks(result.data.data);
-        }
-        catch(error) {
-            console.log("Could not fetch the category list");
-        }
-    }
+    // const fetchSublinks = async() => {
+    //     try{
+    //         const result = await apiConnector("GET", categories.CATEGORIES_API);
+    //         console.log("Printing Sublinks result:" , result);
+    //         // setSubLinks(result.data.data);
+    //     }
+    //     catch(error) {
+    //         console.log("Could not fetch the category list");
+    //     }
+    // }
 
 
-    useEffect( () => {
-        fetchSublinks();
-    },[] )
+    // useEffect( () => {
+    //     // fetchSublinks();
+    // },[] )
 
 
 
@@ -88,9 +89,9 @@ const Navbar = () => {
 
                                 {
                                     subLinks.length ? (
-                                            subLinks.map( (subLink, index) => (
-                                                <Link to={`${subLink.link}`} key={index}>
-                                                    <p>{subLink.title}</p>
+                                            subLinks.map( (subLinks, index) => (
+                                                <Link to={`${subLinks.link}`} key={index}>
+                                                    <p>{subLinks.title}</p>
                                                 </Link>
                                             ) )
                                     ) : (<div></div>)
@@ -122,7 +123,7 @@ const Navbar = () => {
         <div className='flex gap-x-4 items-center'>
 
             {
-                user && user?.accountType != "Instructor" && (
+                user && user?.accountType != ACCOUNT_TYPE.INSTRUCTOR && (
                     <Link to="/dashboard/cart" className='relative'>
                         <AiOutlineShoppingCart />
                         {
@@ -158,7 +159,9 @@ const Navbar = () => {
             }
             
         </div>
-
+        <button className="mr-4 md:hidden">
+          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+        </button>
 
       </div>
     </div>

@@ -128,14 +128,14 @@ export function getPasswordResetToken(email, setEmailSent) {
       console.log("RESETPASSTOKEN RESPONSE............", response)
 
       if (!response.data.success) {
-        throw new Error(response.data.message)
+        throw new Error(response.data.message);
       }
 
       toast.success("Reset Email Sent")
       setEmailSent(true)
     } catch (error) {
       console.log("RESETPASSTOKEN ERROR............", error)
-      toast.error("Failed To Send Reset Email")
+      toast.error("Failed To Send Reset Email");
     }
     toast.dismiss(toastId)
     dispatch(setLoading(false))
@@ -166,7 +166,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
       toast.error("Failed To Reset Password")
     }
     toast.dismiss(toastId)
-    dispatch(setLoading(false))
+    dispatch(setLoading(false)) 
   }
 }
 
