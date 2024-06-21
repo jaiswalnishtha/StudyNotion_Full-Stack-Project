@@ -11,6 +11,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import { useDispatch, useSelector } from "react-redux";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -59,6 +60,14 @@ function App() {
             <OpenRoute>
               <VerifyEmail />
             </OpenRoute>
+          }
+        />
+    <Route
+          path="about"
+          element={
+
+              <About />
+ 
           }
         />
     </Routes>
