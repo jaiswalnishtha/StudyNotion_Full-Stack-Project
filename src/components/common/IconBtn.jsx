@@ -1,10 +1,30 @@
 import React from 'react'
 
-function IconBtn() {
+const IconBtn = ({
+    text,
+    onclick,
+    children,
+    disabled,
+    outline=false,
+    customClasses,
+    type,
+}) => {
   return (
-    <div>
-      
-    </div>
+    <button 
+    disabled={disabled}
+    onClick={onclick}
+    type={type}>
+        {
+            children ? (
+                <>
+                    <span>
+                        {text}
+                    </span>
+                    {children}
+                </>
+            ) : (text)
+        }
+    </button>
   )
 }
 
