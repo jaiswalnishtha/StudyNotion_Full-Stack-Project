@@ -4,7 +4,7 @@ import RenderSteps from "./RenderSteps";
 export default function AddCourse() {
     return (
         <>
-            <div className="text-white">
+            <div className="text-black">
                 <div>
                     <h1>Add Course</h1>
                     <div>
