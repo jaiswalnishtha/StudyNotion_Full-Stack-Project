@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Cart from "./components/core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
+import AddCourse from "./components/core/Dashboard/AddCourse";
 
 function App() {
 
@@ -78,14 +79,7 @@ function App() {
           }
         />  
 
-    <Route
-          path="about"
-          element={
-            <OpenRoute>
-              <About />
-            </OpenRoute>
-          }
-        />
+    <Route path="/about" element={<About/>} />
     <Route path="/contact" element={<Contact />} />
 
     <Route 
@@ -107,7 +101,14 @@ function App() {
           </>
         )
       }
-
+      
+      {
+        user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+          <>
+          <Route path="dashboard/add-course" element={<AddCourse />} />
+          </>
+        )
+      }
 
     </Route>
 
