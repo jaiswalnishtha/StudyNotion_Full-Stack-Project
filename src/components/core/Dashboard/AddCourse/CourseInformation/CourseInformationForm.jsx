@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast"
 import { HiOutlineCurrencyRupee } from "react-icons/hi"
 import { MdNavigateNext } from "react-icons/md"
 import { useDispatch, useSelector } from "react-redux"
+
 import {
   addCourseDetails,
   editCourseDetails,
@@ -51,7 +52,7 @@ export default function CourseInformationForm() {
       setValue("courseBenefits", course.whatYouWillLearn)
       setValue("courseCategory", course.category)
       setValue("courseRequirements", course.instructions)
-      // setValue("courseImage", course.thumbnail)
+      setValue("courseImage", course.thumbnail)
     }
     getCategories()
 
@@ -69,8 +70,8 @@ export default function CourseInformationForm() {
       currentValues.courseBenefits !== course.whatYouWillLearn ||
       currentValues.courseCategory._id !== course.category._id ||
       currentValues.courseRequirements.toString() !==
-        course.instructions.toString() 
-      // || currentValues.courseImage !== course.thumbnail
+        course.instructions.toString() ||
+      currentValues.courseImage !== course.thumbnail
     ) {
       return true
     }
@@ -118,9 +119,9 @@ export default function CourseInformationForm() {
             JSON.stringify(data.courseRequirements)
           )
         }
-        // if (currentValues.courseImage !== course.thumbnail) {
-        //   formData.append("thumbnailImage", data.courseImage)
-        // }
+        if (currentValues.courseImage !== course.thumbnail) {
+          formData.append("thumbnailImage", data.courseImage)
+        }
         // console.log("Edit Form data: ", formData)
         setLoading(true)
         const result = await editCourseDetails(formData, token)
@@ -132,9 +133,9 @@ export default function CourseInformationForm() {
       } else {
         toast.error("No changes made to the form")
       }
-      return;
+      return
     }
-    // create ne course
+
     const formData = new FormData()
     formData.append("courseName", data.courseTitle)
     formData.append("courseDescription", data.courseShortDesc)
@@ -142,9 +143,9 @@ export default function CourseInformationForm() {
     formData.append("tag", JSON.stringify(data.courseTags))
     formData.append("whatYouWillLearn", data.courseBenefits)
     formData.append("category", data.courseCategory)
-    formData.append("instructions", JSON.stringify(data.courseRequirements))
-    // formData.append("thumbnailImage", data.courseImage)
     formData.append("status", COURSE_STATUS.DRAFT)
+    formData.append("instructions", JSON.stringify(data.courseRequirements))
+    formData.append("thumbnailImage", data.courseImage)
     setLoading(true)
     const result = await addCourseDetails(formData, token)
     if (result) {
@@ -152,7 +153,6 @@ export default function CourseInformationForm() {
       dispatch(setCourse(result))
     }
     setLoading(false)
-    
   }
 
   return (
@@ -258,14 +258,14 @@ export default function CourseInformationForm() {
         getValues={getValues}
       />
       {/* Course Thumbnail Image */}
-      {/* <Upload
+      <Upload
         name="courseImage"
         label="Course Thumbnail"
         register={register}
         setValue={setValue}
         errors={errors}
         editData={editCourse ? course?.thumbnail : null}
-      /> */}
+      />
       {/* Benefits of the course */}
       <div className="flex flex-col space-y-2">
         <label className="text-sm text-richblack-5" htmlFor="courseBenefits">
